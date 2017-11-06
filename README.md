@@ -40,10 +40,12 @@ Setting up NHC (0.1b) ...
 
 You can validate that the package was successfully installed by running:
 
+```
 $ dpkg -l nhc
 ||/ Name                                       Version                    Architecture               Description
 +++-==========================================-==========================-==========================-====================================
 ii  nhc                                        0.1b                       all                        NVIDIA Health Check for DGX Platform
+```
 
 ## Running NHC
 
@@ -53,6 +55,7 @@ perform the checks are embedded on NHC framework.
 
 The execution runs as below:
 
+```
 $ ./nhc
 TEST - Verifying DGX platform general configuration
 PASS: OS software layer is on recommended levels
@@ -85,6 +88,7 @@ PASS: libcudnn is on the recommended version
 
 TEST - Verifying DGX platform network configuration
 INFO: System has multiple adapters but enp2s0f1 is unused
+```
 
 It is highly recommended to address all checks marked as FAIL on NHC execution before
 start running deep learning frameworks and models on DGX platform servers.
