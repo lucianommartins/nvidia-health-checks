@@ -26,17 +26,21 @@ Firstly all those required packages must be installed on the target system. Thos
 packages are present on the standard Ubuntu 16.04 repositories, being their
 installation performed as below:
 
+```
 $ sudo apt-get install <package name>
+```
 
 Once all requirements are installed, just download the deb package (NHC.deb) present
 on this repository and run the installation as below:
 
+```
 $ sudo dpkg -i NHC.deb
 Selecting previously unselected package NHC.
 (Reading database ... 232864 files and directories currently installed.)
 Preparing to unpack nhc.deb ...
 Unpacking NHC (0.1b) ...
 Setting up NHC (0.1b) ...
+```
 
 You can validate that the package was successfully installed by running:
 
