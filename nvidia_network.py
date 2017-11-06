@@ -21,3 +21,5 @@ def check_netevs():
             success = False
     if success is True:
         print('\033[1;32mPASS\033[0m: network configuration is properly set and used')
+            
+        
