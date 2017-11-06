@@ -60,7 +60,7 @@ perform the checks are embedded on NHC framework.
 The execution runs as below:
 
 ```
-$ ./nhc
+$ nhc
 TEST - Verifying DGX platform general configuration
 PASS: OS software layer is on recommended levels
 
