@@ -170,4 +170,3 @@ def fs_check():
     else:
         print('\033[1;31mFAIL\033[0m: The following filesystems are more than 80% used')
         print('\n'.join(str(fs) for fs in bad_fs))
-fs_check()
