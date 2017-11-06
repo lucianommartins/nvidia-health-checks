@@ -14,9 +14,10 @@ def dgx_info():
     dgx = {}
     with open('/etc/dgx-release') as file:
         for line in file:
-            field = line.split('=')[0]
-            value = line.split('=')[1].strip('"\n')
-            dgx.update({ field : value })
+            if line not in ['\n', '\r\n']:
+                field = line.split('=')[0]
+                value = line.split('=')[1].strip('"\n')
+                dgx.update({ field : value })
     return(dgx)
 
 # get system memory information
@@ -25,7 +26,8 @@ def memory_info():
     meminfo=OrderedDict()
     with open('/proc/meminfo') as file:
         for line in file:
-            meminfo[line.split(':')[0]] = line.split(':')[1].strip()
+            if line not in ['\n', '\r\n']:
+                meminfo[line.split(':')[0]] = line.split(':')[1].strip()
     return(int(meminfo['MemTotal'].split()[0]))
 
 # get system CPU information
@@ -33,8 +35,9 @@ def cpu_info():
     count = 0
     with open('/proc/cpuinfo') as file:
         for line in file:
-            if 'processor' in line:
-                count += 1
+            if line not in ['\n', '\r\n']:
+                if 'processor' in line:
+                    count += 1
     return(count)
 
 # get GPU related information
@@ -47,7 +50,8 @@ def gpu_info():
         output = cmd.communicate(timeout=10)[0]
         gpus = []
         for line in output.splitlines():
-            gpus.append(line)
+            if line not in ['\n', '\r\n']:
+                gpus.append(line)
         return(gpus)
     except TimeoutExpired:
             cmd.kill()
