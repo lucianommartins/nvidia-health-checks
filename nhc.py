@@ -19,6 +19,11 @@ print('\033[1mTEST\033[0m - Verifying DGX platform CPU configuration')
 cpu_check()
 print('\n')
 
+# check DGX filesystems state
+print('\033[1mTEST\033[0m - Verifying DGX platform filesystems usage')
+fs_check()
+print('\n')
+
 # check DGX GPU configuration
 print('\033[1mTEST\033[0m - Verifying DGX platform GPU configuration')
 gpu_check()

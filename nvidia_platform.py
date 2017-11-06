@@ -44,7 +44,7 @@ def gpu_info():
         '--query-gpu=gpu_name,gpu_bus_id,vbios_version,temperature.gpu,pcie.link.gen.current', 
         '--format=csv,noheader']
         cmd = Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-        output, err = cmd.communicate(timeout=10)
+        output = cmd.communicate(timeout=10)[0]
         gpus = []
         for line in output.splitlines():
             gpus.append(line)
@@ -52,6 +52,12 @@ def gpu_info():
     except TimeoutExpired:
             cmd.kill()
             return('timeout')
+
+def fs_info():
+    command = ['df', '-h']
+    df = Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
+    output = df.communicate()[0]
+    return(output)
 
 # verify OS software layer
 def dgx_check():
@@ -148,3 +154,20 @@ def gpu_check():
     
     else:
         print('\033[1;31mFAIL\033[0m: GPU setup is invalid, please verify')
+
+def fs_check():
+    output = fs_info()
+    bad_fs = []
+    fs_ok = True
+    for line in output.splitlines():
+        if '/dev/' in line:
+            used = line.split()[4].strip('%')
+            if int(used) > 80:
+                fs_ok = False
+                bad_fs.append(line)
+    if fs_ok is True:
+        print('\033[1;32mPASS\033[0m: No filesystems are beyond 80% used')
+    else:
+        print('\033[1;31mFAIL\033[0m: The following filesystems are more than 80% used')
+        print('\n'.join(str(fs) for fs in bad_fs))
+fs_check()
